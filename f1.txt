@@ -1,0 +1,14 @@
+import docker
+
+def restart_container(container_name):
+    client = docker.from_env()
+    try:
+        container = client.containers.get(container_name)
+        print(f"Restarting container '{container_name}'...")
+        container.restart()
+        print(f"Container '{container_name}' has been restarted.")
+    except docker.errors.NotFound:
+        print(f"Container '{container_name}' not found.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+
